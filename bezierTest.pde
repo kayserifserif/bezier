@@ -3,15 +3,16 @@ import controlP5.*;
 // VARIABLES
 
 ControlP5 cp5;
-float t = 0;
 //float sliderValue = 0;
 //Slider slider;
+CheckBox displayPoints;
 
 PVector[] points = new PVector[3];
 int pointRadius = 7;
 
 PVector q, r, p;
-ArrayList<PVector> curve;
+
+float t = 0;
 
 void randomisePoints() {
   for(int i = 0; i < 3; i++) {
@@ -41,9 +42,17 @@ void setup() {
   // randomiser button
   cp5 = new ControlP5(this);
   cp5.addButton("randomisePoints")
-    .setValue(0)
-    .setPosition(50, 50)
-    .setSize(200, 20);
+     .setValue(0)
+     .setPosition(50, 50)
+     .setSize(200, 20)
+     .setCaptionLabel("Randomise points");
+    
+  // control points checkbox
+  displayPoints = cp5.addCheckBox("displayPoints")
+                     .setPosition(50, 80)
+                     .setSize(20, 20)
+                     .setColorLabel(255)
+                     .addItem("Display control points", 0);
 }
 
 void drawCurve() {
@@ -89,6 +98,7 @@ void draw() {
   // reset
   background(255);
   // line through control points
+  //if() {
   stroke(0);
   strokeWeight(1);
   for(int i = 0; i < points.length - 1; i++) {
@@ -97,6 +107,7 @@ void draw() {
   for(int i = 0; i < points.length; i++) {
     ellipse(points[i].x, points[i].y, pointRadius, pointRadius);
   }
+  //}
   // update t from slider
   //t = sliderValue;
   // weighted average points
