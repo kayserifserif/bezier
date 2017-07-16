@@ -13,23 +13,37 @@ int pointRadius = 7;
 PVector q, r, p;
 ArrayList<PVector> curve;
 
+void randomisePoints() {
+  for(int i = 0; i < 3; i++) {
+    points[i] = new PVector(random(width), random(height));
+  }
+}
+
 void setup() {
   size(1280, 720);
   smooth();
   
-  for(int i = 0; i < 3; i++) {
-    points[i] = new PVector(random(width), random(height));
-  }
+  //for(int i = 0; i < 3; i++) {
+  //  points[i] = new PVector(random(width), random(height));
+  //}
+  randomisePoints();
   q = new PVector();
   r = new PVector();
   p = new PVector();
   
-  // horizontal slider
+  // t slider
   //cp5 = new ControlP5(this);
   //cp5.addSlider("sliderValue")
     //.setPosition(100, 50)
     //.setSize(200, 20)
     //.setRange(0, 1);
+    
+  // randomiser button
+  cp5 = new ControlP5(this);
+  cp5.addButton("randomisePoints")
+    .setValue(0)
+    .setPosition(50, 50)
+    .setSize(200, 20);
 }
 
 void drawCurve() {
