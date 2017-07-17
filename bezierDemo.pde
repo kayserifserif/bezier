@@ -11,13 +11,14 @@ Slider tSlider;
 float sliderValue;
 Button randomisePoints;
 CheckBox displayPoints;
+Textlabel[][] labels = new Textlabel[2][3];
 
 PVector[] points = new PVector[3];
 int pointRadius = 7;
 
 PVector q, r, p;
 
-float t = 0;
+float t;
 
 void randomisePoints() {
   for(int i = 0; i < 3; i++) {
@@ -65,6 +66,19 @@ void setup() {
               //.setColorValueLabel(0)
               .setLabelVisible(true);
   sliderValue = 0.5;
+  
+  labels[0][0] = cp5.addTextlabel("A")
+                    .setText("A");
+  labels[0][1] = cp5.addTextlabel("B")
+                    .setText("B");
+  labels[0][2] = cp5.addTextlabel("C")
+                    .setText("C");
+  labels[1][0] = cp5.addTextlabel("Q")
+                    .setText("Q");
+  labels[1][1] = cp5.addTextlabel("R")
+                    .setText("R");
+  labels[1][2] = cp5.addTextlabel("P")
+                    .setText("P");
 }
 
 void drawCurve() {
@@ -114,9 +128,11 @@ void draw() {
     noFill();
     stroke(0);
     strokeWeight(1);
+    // draw lines
     for(int i = 0; i < points.length - 1; i++) {
       line(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
     }
+    // draw points
     for(int i = 0; i < points.length; i++) {
       ellipse(points[i].x, points[i].y, pointRadius, pointRadius);
     }
@@ -139,6 +155,17 @@ void draw() {
     //fill(#72A276);
     fill(#FE4E00);
     ellipse(p.x, p.y, pointRadius * 1.5, pointRadius * 1.5);
+    //for(int n = 0; n < labels.length; n++) {
+      for(int i = 0; i < labels[0].length; i++) {
+        labels[0][i].setPosition(points[i].x - 7, points[i].y - 20)
+                    .setColorValue(0)
+                    .draw(this);
+      }
+    //}
     checkMouseHover();
+  } else {
+    for(int i = 0; i < labels[0].length; i++) {
+      labels[0][i].hide();
+    }
   }
 }
