@@ -7,8 +7,8 @@ int bwidth;
 int bheight;
 
 ControlP5 cp5;
-//float sliderValue = 0;
-//Slider slider;
+Slider tSlider;
+float sliderValue;
 Button randomisePoints;
 CheckBox displayPoints;
 
@@ -31,23 +31,15 @@ void setup() {
   bheight = height - border;
   smooth();
   
-  //for(int i = 0; i < 3; i++) {
-  //  points[i] = new PVector(random(width), random(height));
-  //}
   randomisePoints();
   q = new PVector();
   r = new PVector();
   p = new PVector();
   
-  // t slider
-  //cp5 = new ControlP5(this);
-  //cp5.addSlider("sliderValue")
-    //.setPosition(100, 50)
-    //.setSize(200, 20)
-    //.setRange(0, 1);
+  // create new ControlP5
+  cp5 = new ControlP5(this);
     
   // randomiser button
-  cp5 = new ControlP5(this);
   randomisePoints = cp5.addButton("randomisePoints")
                        .setValue(0)
                        .setPosition(50, 50)
@@ -59,7 +51,20 @@ void setup() {
                      .setPosition(50, 80)
                      .setSize(20, 20)
                      .setColorLabel(255)
-                     .addItem("Display control points", 1);
+                     .addItem("Display control points", 1)
+                     .activate(0);
+  
+  // t parameter slider
+  tSlider = cp5.addSlider("sliderValue")
+              .setPosition(50, 110)
+              .setSize(195, 20)
+              .setRange(0, 1)
+              .setValue(0.5)
+              .setCaptionLabel("t")
+              .setColorCaptionLabel(0)
+              //.setColorValueLabel(0)
+              .setLabelVisible(true);
+  sliderValue = 0.5;
 }
 
 void drawCurve() {
@@ -73,7 +78,6 @@ void drawCurve() {
     p.x = (1-t) * q.x + t * r.x;
     p.y = (1-t) * q.y + t * r.y;
     point(p.x, p.y);
-    //line(q.x, q.y, r.x, r.y);
   }
 }
 
@@ -104,7 +108,8 @@ void mouseDragged() {
 void draw() {
   // reset
   background(255);
-  // line through control points
+  drawCurve();
+  // if checkbox is checked
   if(displayPoints.getState(0)) {
     noFill();
     stroke(0);
@@ -115,20 +120,24 @@ void draw() {
     for(int i = 0; i < points.length; i++) {
       ellipse(points[i].x, points[i].y, pointRadius, pointRadius);
     }
-    // weighted average points
-    t = 0.5;
+    // update t from slider
+    t = sliderValue;
     q.x = (1-t) * points[0].x + t * points[1].x;
     q.y = (1-t) * points[0].y + t * points[1].y;
     r.x = (1-t) * points[1].x + t * points[2].x;
     r.y = (1-t) * points[1].y + t * points[2].y;
+    // draw first interpolation line
     line(q.x, q.y, r.x, r.y);
+    // draw first interpolation points
+    noStroke();
     fill(0);
     ellipse(q.x, q.y, pointRadius, pointRadius);
     ellipse(r.x, r.y, pointRadius, pointRadius);
+    // draw second interpolation point
+    p.x = (1-t) * q.x + t * r.x;
+    p.y = (1-t) * q.y + t * r.y;
+    //fill(#72A276);
+    fill(#FE4E00);
+    ellipse(p.x, p.y, pointRadius * 1.5, pointRadius * 1.5);
   }
-  // update t from slider
-  //t = sliderValue;
-  drawCurve();
-  //println(displayPoints.getArrayValue());
-  //checkMouseHover();
 }
