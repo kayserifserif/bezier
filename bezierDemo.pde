@@ -82,23 +82,23 @@ void drawCurve() {
 }
 
 // hover
-//void checkMouseHover() {
-//  for(int i = 0; i < points.length; i++) {
-//    if((points[i].x - pointRadius < mouseX && mouseX < points[i].x + pointRadius)
-//        && (points[i].y - pointRadius < mouseY || mouseY < points[i].y + pointRadius)) {
-//      cursor(HAND);      
-//    }
-//    else {
-//      cursor(ARROW);
-//    }
-//  }
-//}
+void checkMouseHover() {
+  for(int i = 0; i < points.length; i++) {
+    if(points[i].x - pointRadius < mouseX && mouseX < points[i].x + pointRadius
+        && points[i].y - pointRadius < mouseY && mouseY < points[i].y + pointRadius) {
+      cursor(HAND);      
+    }
+    else {
+      cursor(ARROW);
+    }
+  }
+}
 
 // drag control points
 void mouseDragged() {
   for(int i = 0; i < points.length; i++) {
-    if((points[i].x - pointRadius < mouseX && mouseX < points[i].x + pointRadius)
-        && (points[i].y - pointRadius < mouseY || mouseY < points[i].y + pointRadius)) {
+    if(points[i].x - pointRadius < mouseX && mouseX < points[i].x + pointRadius
+        && points[i].y - pointRadius < mouseY && mouseY < points[i].y + pointRadius) {
       points[i].x = mouseX;
       points[i].y = mouseY;
     }
@@ -139,5 +139,6 @@ void draw() {
     //fill(#72A276);
     fill(#FE4E00);
     ellipse(p.x, p.y, pointRadius * 1.5, pointRadius * 1.5);
+    checkMouseHover();
   }
 }
