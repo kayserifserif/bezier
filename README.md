@@ -1,4 +1,3 @@
-
 # bezierDemo
 An implementation of de Castlejau's algorithm: given three control points, the program constructs a quadratic Bézier curve.
 
@@ -11,4 +10,5 @@ An implementation of de Castlejau's algorithm: given three control points, the p
 ## Features
 * Randomise placement of control points
 * Show/hide anchor points and lines
-* Manipulate `t` parameter to follow construction of path
+* Manipulate `t` parameter to follow construction of curve
+* Drag control points to update curve
