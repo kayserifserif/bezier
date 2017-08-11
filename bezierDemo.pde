@@ -47,12 +47,12 @@ void setup() {
                        .setSize(200, 20)
                        .setCaptionLabel("Randomise points");
     
-  // control points checkbox
+  // anchor points checkbox
   displayPoints = cp5.addCheckBox("displayPoints")
                      .setPosition(50, 80)
                      .setSize(20, 20)
                      .setColorLabel(255)
-                     .addItem("Display control points", 1)
+                     .addItem("Display anchor points", 1)
                      .activate(0);
   
   // t parameter slider
