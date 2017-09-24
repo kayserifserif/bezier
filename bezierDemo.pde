@@ -84,6 +84,7 @@ void draw() {
   background(255);
   drawCurve();
   drawGuides();
+  drawGraph();
 }
 
 void randomisePoints() {
@@ -154,6 +155,35 @@ void drawGuides() {
       labels[0][i].hide();
     }
   }
+}
+
+void drawGraph() {
+  // dimensions
+  int hMargin = 54; // spacing between bars
+  int vMargin = 35; // vertical spacing
+  int rectWidth = 5;
+  // values
+  float a = pow((1-t), 2) * 100;
+  float b = 2 * t * (1-t) * 100;
+  float c = pow(t, 2) * 100;
+  // title
+  textAlign(RIGHT);
+  text("INFLUENCE OF POINTS (%)", bwidth, border);
+  // point labels
+  textAlign(LEFT);
+  text("A", bwidth - hMargin*2 - rectWidth, border + vMargin*2/3);
+  text("B", bwidth - hMargin - rectWidth, border + vMargin*2/3);
+  text("C", bwidth - rectWidth, border + vMargin*2/3);
+  // value labels
+  textAlign(CENTER);
+  text(round(a), bwidth - hMargin*2 - rectWidth/2, border + vMargin + a + vMargin/2);
+  text(round(b), bwidth - hMargin - rectWidth/2, border + vMargin + b + vMargin/2);
+  text(round(c), bwidth - rectWidth/2, border + vMargin + c + vMargin/2);
+  // bars
+  fill(#0074D9);
+  rect(bwidth - hMargin*2 - rectWidth, border + vMargin, rectWidth, a);
+  rect(bwidth - hMargin - rectWidth, border + vMargin, rectWidth, b);
+  rect(bwidth - rectWidth, border + vMargin, rectWidth, c);
 }
 
 boolean isHover() {
