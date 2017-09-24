@@ -83,6 +83,30 @@ void draw() {
   // reset
   background(255);
   drawCurve();
+  drawGuides();
+}
+
+void randomisePoints() {
+  for (int i = 0; i < 3; i++) {
+    points[i] = new PVector(random(border, bwidth), random(border, bheight));
+  }
+}
+
+void drawCurve() {
+  stroke(255, 204, 0);
+  strokeWeight(2);
+  for (t = 0; t < 1; t += 0.001) {
+    q.x = (1-t) * points[0].x + t * points[1].x;
+    q.y = (1-t) * points[0].y + t * points[1].y;
+    r.x = (1-t) * points[1].x + t * points[2].x;
+    r.y = (1-t) * points[1].y + t * points[2].y;
+    p.x = (1-t) * q.x + t * r.x;
+    p.y = (1-t) * q.y + t * r.y;
+    point(p.x, p.y);
+  }
+}
+
+void drawGuides() {
   // if checkbox is checked
   if (displayPoints.getState(0)) {
     noFill();
@@ -129,26 +153,6 @@ void draw() {
     for (int i = 0; i < labels[0].length; i++) {
       labels[0][i].hide();
     }
-  }
-}
-
-void randomisePoints() {
-  for (int i = 0; i < 3; i++) {
-    points[i] = new PVector(random(border, bwidth), random(border, bheight));
-  }
-}
-
-void drawCurve() {
-  stroke(255, 204, 0);
-  strokeWeight(2);
-  for (t = 0; t < 1; t += 0.001) {
-    q.x = (1-t) * points[0].x + t * points[1].x;
-    q.y = (1-t) * points[0].y + t * points[1].y;
-    r.x = (1-t) * points[1].x + t * points[2].x;
-    r.y = (1-t) * points[1].y + t * points[2].y;
-    p.x = (1-t) * q.x + t * r.x;
-    p.y = (1-t) * q.y + t * r.y;
-    point(p.x, p.y);
   }
 }
 
