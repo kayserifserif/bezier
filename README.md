@@ -1,6 +1,6 @@
 # bezierDemo
 
-An implementation of de Castlejau's algorithm: given three control points, the program constructs a quadratic Bézier curve.
+Uses de Casteljau's algorithm to evaluate Bézier curves. Given three control points, the program constructs a quadratic Bézier curve.
 
 ## Dependencies
 
