@@ -1,4 +1,4 @@
-# bezierDemo
+# bezier
 
 An implementation of de Castlejau's algorithm: given three control points, the program constructs a quadratic Bézier curve.
 
